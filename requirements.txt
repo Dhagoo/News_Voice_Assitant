@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+feedparser
+transformers
+torch
+gTTS
+scikit-learn
+pandas
+beautifulsoup4
+streamlit
+plotly
+requests
+python-multipart
+joblib
+numpy
