@@ -1,0 +1,27 @@
+services:
+  # Backend Service (FastAPI)
+  - type: web
+    name: newspaper-backend
+    env: python
+    plan: free
+    buildCommand: |
+      pip install -r requirements.txt
+      python backend/models/generate_dummy_models.py
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.6
+
+  # Frontend Service (Streamlit)
+  - type: web
+    name: newspaper-frontend
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run frontend/app.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: BACKEND_URL
+        # This will be overridden in Render dashboard or linked via Blueprint
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.10.6
